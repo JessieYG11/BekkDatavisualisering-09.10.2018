@@ -9,3 +9,44 @@ const data = [
 ];
 
 // Entrypoint for d3
+const tableTH = d3
+  .select("#table")
+  .append("thead")
+  .append("tr");
+
+tableTH
+  .append("th")
+  .text("Name");
+
+tableTH
+  .append("th")
+  .text("Hardness");
+
+tableTH
+  .append("th")
+  .text("Color");
+
+const tableTB = d3
+  .select("#table")
+  .append("tbody")
+  .selectAll("tr")
+  .data(data);
+
+const tableTR = tableTB
+  .enter()
+  .append("tr");
+
+const numberFormat = d3.format(".1f");
+
+tableTR
+  .append("td")
+  .text((d, i) => d.name);
+
+tableTR
+  .append("td")
+  .text((d, i) => numberFormat(d.hardness));
+
+tableTR
+  .append("td")
+  .text((d, i) => d.color)
+  .attr("style", (d, i) => `color: ${d.color}`);
